@@ -1,5 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-const { emit } = require('process');
 
 const app = require('express')();
 const http = require('http').createServer(app);

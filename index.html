@@ -35,23 +35,23 @@
     <div id="app" class="container">
       <div v-if="user.isAuthorized" id="chat-app" class="container d-flex">
         <div class="d-flex flex-column h-100 flex-grow-1">
-          <div class="card flex-grow-1">
-            <div class="card-body d-flex flex-column justify-content-between">
-              <ul>
-                <li
-                  :class="{ 'justify-content-end' : e.username !== user.username}"
-                  class="d-flex align-items-center"
-                  v-for="(e,i) in messages"
-                  :key="i"
-                >
-                  <div :class="{ 'order-1' : e.username !== user.username}">{{e.username}}</div>
-                  <div :class="{ 'order-0' : e.username !== user.username}" class="message ml-3 mr-3">
-                    {{e.message}}
-                  </div>
-                </li>
-              </ul>
-              <div v-if="usersTyping.length > 0">{{usersTyping.join(', ')}} Typing...</div>
-            </div>
+          <div class="card flex-grow-1 overflow-auto">
+            <ul class="card-body d-flex flex-column">
+              <li
+                :class="{ 'justify-content-end' : e.username !== user.username}"
+                class="d-flex align-items-center"
+                v-for="(e,i) in messages"
+                :key="i"
+              >
+                <div :class="{ 'order-1' : e.username !== user.username}">{{e.username}}</div>
+                <div :class="{ 'order-0' : e.username !== user.username}" class="message ml-3 mr-3">
+                  {{e.message}}
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="relative" style="height: 40px;">
+            <div class="mt-3" v-if="usersTyping.length > 0">{{usersTyping.join(', ')}} Typing...</div>
           </div>
           <form @submit="submit">
             <div class="input-group container mb-3 mt-3">
